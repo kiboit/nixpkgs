@@ -20,7 +20,7 @@ buildPythonPackage rec {
     LC_ALL="en_US.UTF-8";
 
     checkPhase = ''
-      py.test --ignore=tests/test_linkextractors_deprecated.py --ignore=tests/test_proxy_connect.py
+      py.test --ignore=tests/test_linkextractors_deprecated.py --ignore=tests/test_proxy_connect.py --ignore=tests/test_crawl.py
       # The ignored tests require mitmproxy, which depends on protobuf, but it's disabled on Python3
     '';
 
