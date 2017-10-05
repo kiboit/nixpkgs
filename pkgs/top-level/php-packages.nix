@@ -505,4 +505,22 @@ let
       maintainers = with maintainers; [ cmcdragonkai ];
     };
   };
+
+  mysql = let
+    mysqlHeaders = with pkgs; mysql.connector-c;
+  in buildPecl rec {
+    name = "mysql-${version}";
+    version = "230a828";
+
+    buildInputs = [ mysqlHeaders ];
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/php/pecl-database-mysql/archive/230a8287c04c69dfc49f6a68a5debb4e4198e98f.tar.gz";
+      sha256 = "0mn6baa7slrfy5kz0m4dmlplvxcn8mqhcmfgr25npaawzaq4kpy7";
+    };
+
+    configureFlags = [ "--with-mysql=${mysqlHeaders}" ];
+
+    patches = [];
+  };
 }; in self
